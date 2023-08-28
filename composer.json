@@ -1,0 +1,41 @@
+{
+    "name": "melsaka/mediafile",
+    "description": "Upload files and images to your laravel app with less effort.",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "mediafile",
+        "laravel-mediafile",
+        "laravel-medialibrary",
+        "media",
+        "images",
+        "files"
+    ],
+    "authors": [
+        {
+            "name": "mohamed elsaka",
+            "email": "sakaz8050@gmail.com",
+            "homepage": "https://github.com/melsaka",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Melsaka\\MediaFile\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.3|^8.0",
+        "intervention/image": "^2.7",
+        "laravel/framework": "^8.75"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Melsaka\\MediaFile\\MediaFileServiceProvider"
+            ]
+        }
+    }
+}
