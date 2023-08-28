@@ -21,15 +21,10 @@ Upload files and images to your laravel app with less effort.
 Upload a file to the server, and place it into the images directory in `'storage/app/public/media/images'`. This will create and returns a Media record that can be used to refer to the file.
 
 ```php
-// $request->folder = 'images'.
-// get the images folder that you wanna store the file into it.
 $folder = Folder::whereSlug($request->folder)->firstOrFail();
 
-// init MediaFile library
 $mediafile = new MediaFile($folder);
 
-// Saves the file in [/storage/app/public/media/[folder_slug]/], 
-// store it in database and returns Media eloquent model instance.
 $media = $mediafile->store($request->file('file')); 
 ```
 
@@ -84,6 +79,10 @@ Run the migrations to add the required tables to your database.
 ```php
 php artisan migrate
 ```
+
+Run the app with the `php artisan serve` command and go to `localhost:8000/mediafiles`.
+
+Over there you gonna find a complete setup that allows you to manage folders, files and images.
 
 **(Optional)** You can also publish controllers, migrations and views using these artisan commands.
 
