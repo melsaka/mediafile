@@ -20,7 +20,9 @@ Simplify the process of adding files and images to your Laravel app.
 
 ## Example Usage
 
-Upload a file to the server, and place it into the images directory in `'storage/app/public/media/images'`. This will create and returns a Media record that can be used to refer to the file.
+Upload a file to the server, and place it into the images directory in `'storage/app/public/media/images'`. 
+
+This will create and returns a Media record that can be used to refer to the file.
 
 ```php
 $folder = Folder::whereSlug($request->folder)->firstOrFail();
@@ -35,8 +37,6 @@ $media = $mediafile->store($request->file('file'));
 You can also update a media record by simply do so:
 
 ```php
-$mediafile = new MediaFile($folder);
-
 $media = $mediafile->update($request, $media);
 ```
 
@@ -105,7 +105,9 @@ php artisan vendor:publish --tag=mediafile-views
 
 ## How To Use
 
-Before you upload images you must create folder to put images into it, folders are created into '`storage/app/public/media/`' folder by default but you can customize this to create them into `storage/app/public/` folder from the `config/mediafile.php` file.
+Before you upload images you must create a folder to put images into it, folders are created into '`storage/app/public/media/`' folder by default,
+
+but you can customize this to create them into `storage/app/public/` folder from the `config/mediafile.php` file.
 
 We can use the `MediaFolder` class to easily create folders like this:
 
@@ -137,8 +139,8 @@ $mediafolder->delete($folder);
 After creating folders you can upload files/images into them using the `MediaFile` class, to upload image file for example:
 
 ```php
-// import the MediaFolder Class
-use Melsaka\MediaFile\MediaFolder;
+// import the MediaFile Class
+use Melsaka\MediaFile\MediaFile;
 
 // select the folder that you wanna upload images into it.
 $folder = Folder::whereSlug($request->folder)->firstOrFail();
@@ -150,7 +152,9 @@ $mediafile = new MediaFile($folder);
 $mediafile->store($request->file('image'));
 ```
 
-***Note:*** To upload files, you must be logged in, becuase the `MediaFile` class assigns `auth()->id()` to the user_id column in database, but for testing purposes you can do so: `new MediaFile($folder, false)` to upload files without being logged in, and in this case it will assign `0` to the user_id column in database.
+***Note:*** To upload files, you must be logged in, becuase the `MediaFile` class assigns `auth()->id()` to the `user_id` column in database, 
+
+but for testing purposes you can do so: `new MediaFile($folder, false)` to upload files without being logged in, and in this case it will assign `0` to the `user_id` column in database.
 
 When you try to update an image (`name`, `alt`, `title`, `caption`) only the `name` is required.
 
@@ -263,7 +267,9 @@ To disable this feature, change the `'routes'` value to `false` in the `config/m
 
 MediaFile allows you to create folders before you upload files into them, and by default the main folder called `media` and folders are being created in this path `storage/app/public/media/`.
 
-You can change the name of the main folder `media` by changing the value of `'folder_name'` in the `config/mediafile.php` file, and if you want to create folders inside the public folder: `storage/app/public/` directly wihtout a main folder you can do so by changing the value to null like his: `'folder_name' => null`.
+You can change the name of the main folder `media` by changing the value of `'folder_name'` in the `config/mediafile.php` file, 
+
+and if you want to create folders inside the public folder: `storage/app/public/` directly wihtout a main folder you can do so by changing the value to null like his: `'folder_name' => null`.
 
 
 ### Image Encoder
@@ -284,7 +290,13 @@ You can customize the number of thumbnails and the width of each thumbnail in th
 
 ### Image Thumbnail Separator
 
-The default value of `image_thumbnail_separator` in the `config/mediafile.php` file is: `_`, and it represent how you want to seperate between the name of the image and the size of the image thumbnail, which means, If we upload an image named `cat.png` then the thumbnails of this image are gonna be named this way: (cat_300.webp, cat_600.webp, cat_900.webp, etc..) 
+The default value of `image_thumbnail_separator` in the `config/mediafile.php` file is: `_`, 
+
+and it represent how you want to seperate between the name of the image and the size of the image thumbnail, 
+
+which means, If we upload an image named `cat.png` then the thumbnails of this image are gonna be named this way: 
+
+(`cat_300.webp`, `cat_600.webp`, `cat_900.webp`, etc..) 
 
 
 ## License
