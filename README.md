@@ -124,7 +124,9 @@ $mediafolder->store($request->name, $request->order);
 
 The store method accpets 2 params the `$name` of the folder and the `$order` in numbers. it creates unique slug automatically based on the `$name` value.
 
-To edit a folder you must have in your $request 3 inputs (`name`, `slug`, `order`) all of them are `required`. Both methods return an instance of `Folder` eloquent instance.
+To edit a folder you must have in your $request 3 inputs (`name`, `slug`, `order`) all of them are `required`. 
+
+***Note:*** Both methods return an instance of `Folder` eloquent instance.
 
 ```php
 $mediafolder->update($request, $folder);
@@ -136,7 +138,7 @@ It's so easy to delete a folder and all it's files.
 $mediafolder->delete($folder);
 ```
 
-After creating folders you can upload files/images into them using the `MediaFile` class, to upload image file for example:
+After creating folders you can upload files/images into them using the `MediaFile` class.
 
 ```php
 // import the MediaFile Class
