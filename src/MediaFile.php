@@ -18,9 +18,13 @@ class MediaFile
 
     public $folder;
 
-    public function __construct(Folder $folder)
+    public $testing;
+
+    public function __construct(Folder $folder, $testing = false)
     {
         $this->folder = $folder;
+
+        $this->$testing = $testing;
     }
 
     public function store(UploadedFile $uploadedFile)
@@ -41,8 +45,10 @@ class MediaFile
 
         $thumbnails = Media::getImageThumbnailsConfigurations();
 
+        $userId = $this->testing ? 0 : auth()->id();
+
         $media = Media::create([
-            'user_id'       => auth()->check() ? auth()->id() : 1, // must change to auth()->id()
+            'user_id'       => $userId,
             'folder_id'     => $this->folder->id,
             'name'          => $fileName,
             'extension'     => $fileExtension,

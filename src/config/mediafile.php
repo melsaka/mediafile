@@ -6,7 +6,7 @@ return [
     
     // The main folder name in /storage/app/public/[folder_name] the default is 'media'.
     // Set it to [null or false] if you don't want your folders to be in one main folder
-    'folder_name'   => null,
+    'folder_name'   => 'media',
 
     // Every uploaded image is gonna have an encoded version of it, and also encoded 
     // thumbnails with different sizes, the default encoded image data is 'webp'.
