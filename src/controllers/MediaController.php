@@ -36,7 +36,7 @@ class MediaController extends Controller
 
         $folder = Folder::whereSlug($request->folder)->firstOrFail();
 
-        $mediafile = new MediaFile($folder);
+        $mediafile = new MediaFile($folder, true);
 
         $media = $mediafile->store($request->file('file'));
 
