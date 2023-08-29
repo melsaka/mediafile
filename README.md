@@ -1,6 +1,7 @@
 # MediaFile
 
-Upload files and images to your laravel app with less effort.
+Simplify the process of adding files and images to your Laravel app.
+
 
 ## Features
 
@@ -15,6 +16,7 @@ Upload files and images to your laravel app with less effort.
 - Besides the ability to rename files, add image alt, title and caption. You can fetch file size and get image srcset and sizes in an easy way `$media->getSrcset()`. 
 
 - Offers built-in routes, controllers, models, and views to get you started right away after installation without writing any additional code.
+
 
 ## Example Usage
 
@@ -45,6 +47,7 @@ $mediafile = new MediaFile($folder);
 
 $mediafile->delete($media);
 ```
+
 
 ## Installation
 
@@ -98,6 +101,7 @@ php artisan vendor:publish --tag=mediafile-migrations
 // publish views
 php artisan vendor:publish --tag=mediafile-views
 ```
+
 
 ## How To Use
 
@@ -240,9 +244,11 @@ $media->getSrcset();
 $media->getSizes();
 ```
 
+
 ## MediaFile Configurations
 
 Now let's take a look at the `config/mediafile.php` file and what are the options available there.
+
 
 ### Built-in Routes and Controllers
 
@@ -252,11 +258,13 @@ This feature is enabled by deafult, and you can access it by visiting `/mediafil
 
 To disable this feature, change the `'routes'` value to `false` in the `config/mediafile.php` file, `'routes' => false`.
 
+
 ### The Media Folder
 
 MediaFile allows you to create folders before you upload files into them, and by default the main folder called `media` and folders are being created in this path `storage/app/public/media/`.
 
 You can change the name of the main folder `media` by changing the value of `'folder_name'` in the `config/mediafile.php` file, and if you want to create folders inside the public folder: `storage/app/public/` directly wihtout a main folder you can do so by changing the value to null like his: `'folder_name' => null`.
+
 
 ### Image Encoder
 
@@ -266,15 +274,18 @@ But you can change it to whatever image format you perfer by changing the `image
 
 To learn more about the supported formats check this link: https://image.intervention.io/v2/api/encode.
 
+
 ### Image Thumbnails
 
 Every uploaded image is gonna have 5 different encoded thumbnails with different sizes (`1600w`, `1200w`, `900w`, `600w`, `300w`).
 
 You can customize the number of thumbnails and the width of each thumbnail in the `config/mediafile.php` file, by changing the value of `image_thumbnail_sizes`.
 
+
 ### Image Thumbnail Separator
 
 The default value of `image_thumbnail_separator` in the `config/mediafile.php` file is: `_`, and it represent how you want to seperate between the name of the image and the size of the image thumbnail, which means, If we upload an image named `cat.png` then the thumbnails of this image are gonna be named this way: (cat_300.webp, cat_600.webp, cat_900.webp, etc..) 
+
 
 ## License
 
