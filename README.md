@@ -22,7 +22,7 @@ Simplify the process of adding files and images to your Laravel app.
 
 Upload a file to the server, and place it into the images directory in `'storage/app/public/media/images'`. 
 
-This will create and returns a Media record that can be used to refer to the file.
+This will create and returns a `Media` record that can be used to refer to the file.
 
 ```php
 $folder = Folder::whereSlug($request->folder)->firstOrFail();
@@ -105,7 +105,7 @@ php artisan vendor:publish --tag=mediafile-views
 
 ## How To Use
 
-Before you upload images you must create a folder to put images into it, folders are created into '`storage/app/public/media/`' folder by default,
+Before you upload images you must create a folder to put images into it, folders are created into `storage/app/public/media/` folder by default,
 
 but you can customize this to create them into `storage/app/public/` folder from the `config/mediafile.php` file.
 
@@ -256,7 +256,7 @@ Now let's take a look at the `config/mediafile.php` file and what are the option
 
 ### Built-in Routes and Controllers
 
-MediaFile offers a ready to go setup of routes and controllers that allows you to upload files and images without writing a single line of code.
+`MediaFile` offers a ready to go setup of routes and controllers that allows you to upload files and images without writing a single line of code.
 
 This feature is enabled by deafult, and you can access it by visiting `/mediafiles` in your app. for example: `example.test/mediafiles`.
 
@@ -265,7 +265,7 @@ To disable this feature, change the `'routes'` value to `false` in the `config/m
 
 ### The Media Folder
 
-MediaFile allows you to create folders before you upload files into them, and by default the main folder called `media` and folders are being created in this path `storage/app/public/media/`.
+`MediaFile` allows you to create folders before you upload files into them, and by default the main folder called `media` and folders are being created in this path `storage/app/public/media/`.
 
 You can change the name of the main folder `media` by changing the value of `'folder_name'` in the `config/mediafile.php` file, 
 
