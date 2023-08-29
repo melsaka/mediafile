@@ -228,8 +228,9 @@ $media->isFileAnImage();
 // returns the url of the encoded version of the original image file.
 $media->getEncodedImageLink();
 
-// returns the sizes and urls of the image thumbnails when $onlySizes is true, when you set $onlySizes to false
-// it will returns the seperator, sizes, and urls. The $name param allows to get the url of a single thumbnail, ex: $media->getThumbnail('s')
+// returns the sizes and urls of the image thumbnails when $onlySizes is true, 
+// when you set $onlySizes to false it will returns the seperator, sizes, and urls. 
+// The $name param allows to get the url of a single thumbnail, ex: $media->getThumbnail('s')
 $media->getThumbnails($name = null, $onlySizes = true);
 
 // returns the srcset of an image file.
@@ -238,6 +239,8 @@ $media->getSrcset();
 // returns the sizes of an image file.
 $media->getSizes();
 ```
+
+## MediaFile Configurations
 
 Now let's take a look at the `config/mediafile.php` file and what are the options available there.
 
