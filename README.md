@@ -183,6 +183,10 @@ $mediafile->isFolder($media);
 Here's what you can get from `Media` eloquent instance.
 
 ```php
+use Melsaka\MediaFile\Models\Media;
+
+$media = Media::first();
+
 // User Instance
 $media->user;
 
