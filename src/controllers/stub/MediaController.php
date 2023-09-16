@@ -19,7 +19,7 @@ class MediaController extends Controller
         $selectedFolder = $folder ?: $folders->first();
 
         $mediafiles = $selectedFolder ? $selectedFolder->mediafiles()->orderBy('id', 'desc')->paginate(30)->withQueryString() : [];
-        
+
         return view('MediaFile::media.mediafile', compact('folders', 'selectedFolder', 'mediafiles'));
     }
 
