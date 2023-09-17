@@ -26,8 +26,9 @@
     },
     "require": {
         "php": "^7.3|^8.0",
+        "laravel/framework": "^8.75",
         "intervention/image": "^2.7",
-        "laravel/framework": "^8.75"
+        "guzzlehttp/guzzle": "^7.0.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

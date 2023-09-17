@@ -2,11 +2,12 @@
 
 namespace Melsaka\MediaFile;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Melsaka\MediaFile\MediaFolder;
 use Melsaka\MediaFile\Models\Media;
 use Melsaka\MediaFile\Models\Folder;
-use Illuminate\Database\Eloquent\Model;
 use Melsaka\MediaFile\Helpers\FileHandlers;
 use Melsaka\MediaFile\Helpers\ImageFileHandler;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -110,5 +111,58 @@ class MediaFile
     public function isFolder(Media $media)
     {
         return $media->folder_id === $this->folder->id;
+    }
+
+    public static function createUploadImageFromUrl($imageUrl)
+    {
+        $httpClient = new Client();
+        $response = $httpClient->get($imageUrl);
+
+        // Get the MIME type from the Content-Type header
+        $contentType = $response->getHeaderLine('Content-Type');
+        // Use the custom function to get the file extension
+        $fileExtension = static::getExtensionFromMimeType($contentType);
+
+        if (!$fileExtension) {
+            // Handle the case where the extension cannot be determined
+            throw new Exception('Unable to determine file extension.');
+        }
+
+        $tempFolder = storage_path('app/temps/');
+
+        $temporaryPath = $tempFolder. 'image_'.uniqid().'.'. $fileExtension;
+
+        file_put_contents($temporaryPath, $response->getBody());
+
+        // Define a destructor function to remove the temporary file when it's no longer needed
+        register_shutdown_function(function () use ($tempFolder) {
+            if (is_dir($tempFolder)) {
+                MediaFolder::deleteDirectory($tempFolder);
+            }
+        });
+
+        $uploadedFile = new UploadedFile(
+            $temporaryPath, // The path to the temporary image file
+            basename($temporaryPath), // The original file name (can be different)
+            mime_content_type($temporaryPath), // The MIME type of the file
+            filesize($temporaryPath), // The file size
+            UPLOAD_ERR_OK, // The error code (0 for no error)
+            true // Indicates that the file should be moved to the storage directory
+        );
+
+        return $uploadedFile;
+    }
+
+    private static function getExtensionFromMimeType($mimeType)
+    {
+        $mimeToExtensionMapping = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/gif'  => 'gif',
+            'image/bmp'  => 'bmp',
+            'image/webp' => 'webp'
+        ];
+
+        return $mimeToExtensionMapping[$mimeType] ?? null;
     }
 }

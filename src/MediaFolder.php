@@ -41,7 +41,7 @@ class MediaFolder
             $newStoragePath = Folder::createPath($uniqueSlug);
             $folderUri      = Folder::createUri($uniqueSlug);
 
-            $this->renameDirectory($folder->getStoragePath(), $newStoragePath);
+            static::renameDirectory($folder->getStoragePath(), $newStoragePath);
 
             $folder->mediafiles()->update([
                 'uri' => DB::raw("REPLACE(uri, '$folder->uri', '$folderUri')")
@@ -60,7 +60,7 @@ class MediaFolder
 
     public function delete(Folder $folder)
     {
-        $this->deleteDirectory($folder->getStoragePath());
+        static::deleteDirectory($folder->getStoragePath());
 
         $folder->mediafiles()->delete();
 
@@ -130,7 +130,7 @@ class MediaFolder
         return $requestSlug !== $folder->slug;
     }
 
-    private function renameDirectory($oldFolderPath, $newFolderPath)
+    public static function renameDirectory($oldFolderPath, $newFolderPath)
     {
 
         if (file_exists($oldFolderPath) && is_dir($oldFolderPath)) {
@@ -141,7 +141,7 @@ class MediaFolder
         return false;
     }
 
-    private function deleteDirectory($dirPath)
+    public static function deleteDirectory($dirPath)
     {
         if (!is_dir($dirPath)) {
             return;
@@ -154,7 +154,7 @@ class MediaFolder
                 $filePath = $dirPath . '/' . $file;
 
                 if (is_dir($filePath)) {
-                    $this->deleteDirectory($filePath); // Recursive call for subdirectories
+                    static::deleteDirectory($filePath); // Recursive call for subdirectories
                 } else {
                     unlink($filePath); // Delete individual files
                 }

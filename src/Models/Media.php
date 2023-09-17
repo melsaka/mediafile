@@ -2,16 +2,13 @@
 
 namespace Melsaka\MediaFile\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Melsaka\MediaFile\Models\Folder;
 
 class Media extends Model
 {
-    use HasFactory;
-
     // Settings
-    
+
     protected $fillable = [
         'user_id',
         'folder_id',
@@ -30,8 +27,8 @@ class Media extends Model
     ];
 
     // Relationships
-    
-    public function folder() 
+
+    public function folder()
     {
         return $this->belongsTo(Folder::class);
     }
@@ -55,7 +52,7 @@ class Media extends Model
         return $encoded ? $this->name . '.' .$this->encoder : $this->name . '.' .$this->extension;
     }
 
-    public function getFileSize() 
+    public function getFileSize()
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
 
@@ -89,7 +86,7 @@ class Media extends Model
 
         $thumbnails = [];
         $thumbnails['separator'] = $imageThumbnails['separator'];
-        
+
         $dirPath = dirname($this->uri) . '/';
 
         foreach ($imageThumbnails['sizes'] as $thumbanilName => $size) {

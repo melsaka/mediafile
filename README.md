@@ -172,6 +172,13 @@ It's so easy to delete a file as well.
 $mediafile->delete($media);
 ```
 
+You can upload image file from url using `createUploadImageFromUrl()` method:
+
+```php
+$imageUrl = 'https://source.unsplash.com/featured/300x201';
+$mediafile->createUploadImageFromUrl($imageUrl);
+```
+
 You can also check if a file belongs to a folder like this:
 
 ```php
