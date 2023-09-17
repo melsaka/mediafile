@@ -128,7 +128,9 @@ class MediaFile
             throw new Exception('Unable to determine file extension.');
         }
 
-        $tempFolder = storage_path('app/temps/');
+        $tempFolder = storage_path('app/media-temps/');
+
+        is_dir($tempFolder) ?: @mkdir($tempFolder, 0777, true);
 
         $temporaryPath = $tempFolder. 'image_'.uniqid().'.'. $fileExtension;
 
