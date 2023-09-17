@@ -24,7 +24,7 @@ class MediaFile
     {
         $this->folder = $folder;
 
-        $this->$testing = $testing;
+        $this->testing = $testing;
     }
 
     public function store(UploadedFile $uploadedFile)
