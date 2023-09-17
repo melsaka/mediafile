@@ -156,7 +156,7 @@ $mediafile->store($request->file('image'));
 
 ***Note:*** To upload files, you must be logged in, becuase the `MediaFile` class assigns `auth()->id()` to the `user_id` column in database, 
 
-but for testing purposes you can do so: `new MediaFile($folder, false)` to upload files without being logged in, and in this case it will assign `0` to the `user_id` column in database.
+but for testing purposes you can do so: `new MediaFile($folder, true)` to upload files without being logged in, and in this case it will assign `0` to the `user_id` column in database.
 
 When you try to update an image (`name`, `alt`, `title`, `caption`) only the `name` is required.
 
