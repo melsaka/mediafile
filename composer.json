@@ -30,7 +30,7 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^10.10"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "extra": {
         "laravel": {
