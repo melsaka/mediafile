@@ -167,4 +167,31 @@ class MediaFile
 
         return $mimeToExtensionMapping[$mimeType] ?? null;
     }
+
+    private static function isPublished($controller)
+    {
+        return file_exists(app_path('Http/Controllers/MediaFile/'.$controller.'.php'));
+    }
+
+    private static function ifPublished($controller)
+    {
+        return self::isPublished($controller) ? '\\App\\Http\\Controllers\\MediaFile\\'. $controller : '\\Melsaka\\MediaFile\\Controllers\\'. $controller;
+    }
+
+    public static function routes($name = 'mediafiles')
+    {
+        $folderController = self::ifPublished('FolderController');
+        $mediaController =  self::ifPublished('MediaController');
+
+        \Illuminate\Support\Facades\Route::resource('mediafiles-folders', $folderController)->only(['store', 'update', 'destroy']);
+
+        \Illuminate\Support\Facades\Route::resource($name, $mediaController)
+                                        ->only(['index', 'store', 'update', 'destroy'])
+                                        ->names([
+                                            'index' => 'mediafiles.index',
+                                            'store' => 'mediafiles.store',
+                                            'update' => 'mediafiles.update',
+                                            'destroy' => 'mediafiles.destroy',
+                                        ]);
+    }
 }

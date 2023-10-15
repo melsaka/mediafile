@@ -26,13 +26,8 @@ class MediaFileServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         if (str_contains(url()->current(), 'mediafiles')) {
             Paginator::defaultView('MediaFile::layouts.pagination');
-        }
-
-        if (config('mediafile.routes')) {
-            $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         }
 
         $this->loadViewsFrom(__DIR__.'/views', 'MediaFile');

@@ -1,9 +1,6 @@
 <?php
 
 return [
-    // Dsiable Or Enable built in routes [Enabled by Default].
-    'routes' => true,
-
     // The main folder name in /storage/app/public/[folder_name] the default is 'media'.
     // Set it to [null or false] if you don't want your folders to be in one main folder
     'folder_name'   => 'media',

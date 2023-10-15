@@ -85,10 +85,6 @@ Run the migrations to add the required tables to your database.
 php artisan migrate
 ```
 
-Run the app with the `php artisan serve` command and go to `localhost:8000/mediafiles`.
-
-Over there you gonna find a complete setup that allows you to manage folders, files and images.
-
 **(Optional)** You can also publish controllers, migrations and views using these artisan commands.
 
 ```php
@@ -101,7 +97,6 @@ php artisan vendor:publish --tag=mediafile-migrations
 // publish views
 php artisan vendor:publish --tag=mediafile-views
 ```
-
 
 ## How To Use
 
@@ -176,7 +171,10 @@ You can upload image file from url using `createUploadImageFromUrl()` method:
 
 ```php
 $imageUrl = 'https://source.unsplash.com/featured/300x201';
-$mediafile->createUploadImageFromUrl($imageUrl);
+
+$imageFile = $mediafile->createUploadImageFromUrl($imageUrl);
+
+$mediafile->store($imageFile);
 ```
 
 You can also check if a file belongs to a folder like this:
@@ -261,7 +259,6 @@ $media->getSrcset();
 $media->getSizes();
 ```
 
-
 ## MediaFile Configurations
 
 Now let's take a look at the `config/mediafile.php` file and what are the options available there.
@@ -271,10 +268,23 @@ Now let's take a look at the `config/mediafile.php` file and what are the option
 
 `MediaFile` offers a ready to go setup of routes and controllers that allows you to upload files and images without writing a single line of code.
 
-This feature is enabled by deafult, and you can access it by visiting `/mediafiles` in your app. for example: `example.test/mediafiles`.
+```php
+use Illuminate\Support\Facades\Route;
 
-To disable this feature, change the `'routes'` value to `false` in the `config/mediafile.php` file, `'routes' => false`.
+use Melsaka\MediaFile\MediaFile;
 
+MediaFile::routes();
+```
+
+Now you can access this feature by visiting `/mediafiles` in your app. for example: `example.test/mediafiles`.
+
+You can also change the path name from `/mediafiles` to whatever path you want by passing path name to `MediaFile::routes($path)` method.
+
+```php
+MediaFile::routes('media');
+```
+
+Now you can access this feature by visiting `/media`. for example: `example.test/media`.
 
 ### The Media Folder
 
