@@ -11,6 +11,7 @@ use Melsaka\MediaFile\Models\Folder;
 use Melsaka\MediaFile\Helpers\FileHandlers;
 use Melsaka\MediaFile\Helpers\ImageFileHandler;
 use Intervention\Image\ImageManagerStatic as Image;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class MediaFile
 {
@@ -145,6 +146,33 @@ class MediaFile
 
         $uploadedFile = new UploadedFile(
             $temporaryPath, // The path to the temporary image file
+            basename($temporaryPath), // The original file name (can be different)
+            mime_content_type($temporaryPath), // The MIME type of the file
+            filesize($temporaryPath), // The file size
+            UPLOAD_ERR_OK, // The error code (0 for no error)
+            true // Indicates that the file should be moved to the storage directory
+        );
+
+        return $uploadedFile;
+    }
+    
+    public function livewireFile(TemporaryUploadedFile $temporaryFile)
+    {
+        // Get the temporary file path
+        $temporaryPath = $temporaryFile->getRealPath();
+
+        $tempFolder = storage_path('app/livewire-tmp/');
+
+        // Define a destructor function to remove the temporary file when it's no longer needed
+        register_shutdown_function(function () use ($tempFolder) {
+            if (is_dir($tempFolder)) {
+                MediaFolder::deleteDirectory($tempFolder);
+            }
+        });
+
+        // Create a new UploadedFile instance
+        $uploadedFile = new UploadedFile(
+            $temporaryPath,
             basename($temporaryPath), // The original file name (can be different)
             mime_content_type($temporaryPath), // The MIME type of the file
             filesize($temporaryPath), // The file size

@@ -17,6 +17,7 @@ Simplify the process of adding files and images to your Laravel app.
 
 - Offers built-in routes, controllers, models, and views to get you started right away after installation without writing any additional code.
 
+- Supports Laravel Livewire.
 
 ## Example Usage
 
@@ -179,7 +180,30 @@ $imageFile = $mediafile->createUploadImageFromUrl($imageUrl);
 $mediafile->store($imageFile);
 ```
 
-You can also check if a file belongs to a folder like this:
+You can also use it with laravel livewire by using `livewireFile()` method like this:
+
+```php
+namespace App\Livewire;
+ 
+use Livewire\Component;
+use Livewire\WithFileUploads;
+ 
+class UploadPhoto extends Component
+{
+    use WithFileUploads;
+ 
+    public $photo;
+ 
+    public function save()
+    {
+        $uploadedImage = $mediafile->livewireFile($this->photo);
+        
+        $mediafile->store($uploadedFile);
+    }
+}
+```
+
+You can check if a file belongs to a folder like this:
 
 ```php
 $mediafile = new MediaFile($folder);
